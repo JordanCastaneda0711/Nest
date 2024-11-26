@@ -63,7 +63,7 @@ export class ProveedoresServices{
     }
 
     // Metodo para desactivar un Proveedor
-    async deactive(id: string): Promise<void>{
+    async deactivate(id: string): Promise<void>{
         const result = await this.proveedorModel.findByIdAndUpdate(
             id,
             {activo_proveedor: false}, //Actualiza el campo y lo pasa a falso

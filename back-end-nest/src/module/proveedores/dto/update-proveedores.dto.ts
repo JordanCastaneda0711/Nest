@@ -14,5 +14,5 @@ export class UpdateProveedoresDto{
     celular_proveedor?: string;
 
     @IsBoolean()
-    activo_proveedor?: boolean
+    activo_proveedor?: boolean;
 }

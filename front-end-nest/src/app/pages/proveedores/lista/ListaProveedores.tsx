@@ -26,10 +26,10 @@ const StyledCard = styled(Card)(({ theme }) => ({
   width: "100%",
   marginBottom: theme.spacing(3),
   borderRadius: "20px",
-  backgroundColor: "#f9f9f9",
+  backgroundColor: "#FFFFFFFF",
   padding: theme.spacing(3),
   [theme.breakpoints.up("md")]: {
-    width: "75%",
+    width: "500px",
     margin: "auto",
   },
 }));
@@ -53,11 +53,11 @@ const ActivateButton = styled(ActionButton)({
 });
 
 const DeactivateButton = styled(ActionButton)({
-  backgroundColor: "#ff9800",
-  color: "#fff",
-  "&:hover": {
-    backgroundColor: "#f57c00"
-  },
+    backgroundColor: "#ff9800",
+    color: "#fff",
+    "&:hover": {
+        backgroundColor: "#f57c00"
+    },
 });
 
 const DeleteButton = styled(ActionButton)({
@@ -93,7 +93,7 @@ const ProveedorLista = () => {
 
   const fetchProveedores = async () => {
     try {
-      const respuesta = await fetch('http://localhost:3001/api/Proveedores');
+      const respuesta = await fetch('http://localhost:3001/api/proveedores');
       if (!respuesta.ok) throw new Error('Error al obtener todos los proveedores');
       const data = await respuesta.json();
       setProveedores(data);
@@ -180,21 +180,21 @@ const ProveedorLista = () => {
 
   const handleActivate = async (id: string) => {
     try {
-      await fetch(`http://localhost:3001/api/proveedores/active/${id}`, { method: 'PUT' });
-      fetchProveedores();
+        await fetch(`http://localhost:3001/api/proveedores/active/${id}`, { method: 'PUT' });
+        fetchProveedores();
     } catch (error) {
-      console.error("Error al activar el proveedor:", error);
+        console.error("Error al activar el proveedor:", error);
     }
-  };
+};
 
   const handleDeactivate = async (id: string) => {
     try {
-      await fetch(`http://localhost:3001/api/proveedores/deactivate/${id}`, { method: 'PUT' });
-      fetchProveedores();
+        await fetch(`http://localhost:3001/api/proveedores/deactivate/${id}`, { method: 'PUT' });
+        fetchProveedores();
     } catch (error) {
-      console.error("Error al desactivar el proveedor: ", error);
+        console.error("Error al desactivar el proveedor: ", error);
     }
-  };
+};
 
   const handleDelete = async (id: string) => {
     try {
@@ -226,7 +226,7 @@ const ProveedorLista = () => {
     >
       <section style={{
         background: "linear-gradient(135deg, #61a1bc 0%, #2575fc 100%)", // Gradiente de colores
-        padding: "auto",
+        padding: "50px",
         borderRadius: "100px", // Bordes redondeados
         color: "#fff" // Color del texto
       }}>

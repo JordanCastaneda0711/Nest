@@ -5,7 +5,7 @@ export interface IProductos {
     nombre_producto?: string;
     cantidad?: number;
     precio?: number;
-    cliente: string[];
-    proveedor: string[];
+    cliente?: string[];
+    proveedor?: string[];
     activo?: boolean;
 }

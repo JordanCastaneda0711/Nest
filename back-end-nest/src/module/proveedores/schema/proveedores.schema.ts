@@ -13,7 +13,7 @@ export class Proveedores extends Document implements IProveedores{
     celular_proveedor: string;
 
     @Prop({default: true})
-    activo_proveedor?:boolean;
+    activo_proveedor?: boolean;
 }
 export const ProveedoresSchema = SchemaFactory.createForClass(Proveedores);
 

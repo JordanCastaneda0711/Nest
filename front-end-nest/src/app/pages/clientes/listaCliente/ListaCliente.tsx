@@ -28,7 +28,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
     backgroundColor: "#f9f9f9",
     padding: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
-        width: "75%",
+        width: "500px",
         margin: "auto",
     },
 }));
@@ -222,8 +222,8 @@ const ClienteLista = () => {
       >
             <section style={{
                 background: "linear-gradient(135deg, #61a1bc 0%, #2575fc 100%)",
-                padding: "auto",
-                borderRadius: "20px",
+                padding: "50px",
+                borderRadius: "100px",
                 color: "#fff"
             }}>
                 <Button
