@@ -16,7 +16,7 @@ export class AuthService {
 
 
     //Metodo de registro para el usuario
-    async SignUpDto(signUpDto: SignUpDto): Promise<{ token: string }> {
+    async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { password, ...userData } = signUpDto;
 
     const hashedPassword = await bcrypt.hash(password, 10);

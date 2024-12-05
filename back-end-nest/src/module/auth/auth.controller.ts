@@ -10,7 +10,7 @@ export class AuthController {
 
     @Post('signup')
     async signUp(@Body() signUpDto: SignUpDto): Promise<{ token: string }> {
-        return this.authService.SignUpDto(signUpDto);
+        return this.authService.signUp(signUpDto);
     }
 
     @Post('login')
