@@ -6,12 +6,17 @@ import {
     Param, 
     NotFoundException, 
     Get, 
+    UseGuards,
     Put,
     Patch
 } from '@nestjs/common';
 import { UpdateClientesDto } from '../dto/update-clientes.dto';
 import { CreateClientesDto } from '../dto/create-clientes.dto';
 import { ClientesService } from '../service/clientes.service';
+import { AuthGuard } from '@nestjs/passport';
+import { Roles } from '../../auth/decorators/role.decorator';
+import { ERole } from '../../auth/enum/role.enum';
+import { RolesGuards } from '../../auth/guards/role.guard';
 import { Clientes } from '../schema/clientes.schema';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiParam } from '@nestjs/swagger';
 
@@ -21,6 +26,8 @@ export class ClientesController {
     constructor(private readonly clientesService: ClientesService) {}
 
     @Post()
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Crear un nuevo cliente' })
     @ApiResponse({ status: 201, description: 'Cliente creado con éxito' })
     @ApiResponse({ status: 400, description: 'Solicitud incorrecta' })
@@ -64,6 +71,8 @@ export class ClientesController {
     }
 
     @Put('active/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Activar un cliente por ID' })
     @ApiResponse({ status: 200, description: 'Cliente activado con éxito' })
     @ApiResponse({ status: 404, description: 'Cliente no encontrado' })
@@ -77,6 +86,8 @@ export class ClientesController {
     }
     
     @Put('update/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Actualizar un cliente por ID' })
     @ApiResponse({ status: 200, description: 'Cliente actualizado con éxito' })
     @ApiResponse({ status: 404, description: 'Cliente no encontrado' })
@@ -103,6 +114,8 @@ export class ClientesController {
     }
 
     @Patch('updatePartial/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Actualizar parcialmente un cliente por ID' })
     @ApiResponse({ status: 200, description: 'Cliente actualizado parcialmente con éxito' })
     @ApiResponse({ status: 404, description: 'Cliente no encontrado' })
@@ -126,6 +139,8 @@ export class ClientesController {
     }
 
     @Delete('delete/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Eliminar un cliente por ID' })
     @ApiResponse({ status: 204, description: 'Cliente eliminado con éxito' })
     @ApiResponse({ status: 404, description: 'Cliente no encontrado' })
@@ -139,6 +154,8 @@ export class ClientesController {
     }
 
     @Put('deactivate/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Desactivar un cliente por ID' })
     @ApiResponse({ status: 200, description: 'Cliente desactivado con éxito' })
     @ApiResponse({ status: 404, description: 'Cliente no encontrado' })

@@ -1,4 +1,6 @@
-import { IsNotEmpty, IsString, IsBoolean} from "class-validator";
+import { IsEmpty, IsNotEmpty, IsString, IsBoolean} from "class-validator";
+import { User } from 'src/module/auth/schema/auth.schema';
+
 
 export class UpdateClientesDto{
 
@@ -20,4 +22,7 @@ export class UpdateClientesDto{
 
     @IsBoolean()
     activo_cliente?: boolean;
+
+    @IsEmpty({ message: 'You can not pass user id' })
+    user: User;
 }

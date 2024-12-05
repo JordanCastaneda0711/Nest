@@ -26,15 +26,15 @@ import {
     constructor(private readonly bookServices: BookService) {}
 
     @SkipThrottle()
-    @Get()
-    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
-    @UseGuards(AuthGuard(), RolesGuards)
+   @Get()
+   // @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+   // @UseGuards(AuthGuard(), RolesGuards)
     async findAllBooks(): Promise<Book[]> {
         return await this.bookServices.findAll();
     }
 
     @Post()
-    @UseGuards(AuthGuard())
+    //@UseGuards(AuthGuard())
     async createBook(@Body() book: CreateDtoBook, @Req() req): Promise<Book> {
         return await this.bookServices.createBook(book, req.user);
     }

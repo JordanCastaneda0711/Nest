@@ -1,3 +1,4 @@
+import { User } from 'src/module/auth/schema/auth.schema';
 
 
 export interface IClientes{
@@ -7,4 +8,5 @@ export interface IClientes{
     email_cliente: string;
     celular_cliente: string;
     activo_cliente?: boolean;
+    user: User;
 }
