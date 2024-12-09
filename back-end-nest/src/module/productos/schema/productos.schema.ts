@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types } from "mongoose";
+import mongoose, { Document, Types } from "mongoose";
 import { IProductos } from "../interface/productos.interface";
 import { Clientes } from "src/module/clientes/schema/clientes.schema";
+import { User } from 'src/module/auth/schema/auth.schema';
 import { Proveedores } from "src/module/proveedores/schema/proveedores.schema";
 
 @Schema()
@@ -25,6 +26,9 @@ export class Productos extends Document implements IProductos {
 
     @Prop({ default: true })
     activo?: boolean;
+
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+    user: User;
 
 }
 

@@ -6,6 +6,7 @@ import {
     Param, 
     NotFoundException, 
     Get, 
+    UseGuards,
     Put,
     Patch
 } from '@nestjs/common';
@@ -13,6 +14,10 @@ import {
 import { ProveedoresServices } from '../service/proveedores.service';
 import { CreateProveedoresDto } from '../dto/create-proveedores.dto';
 import { UpdateProveedoresDto } from '../dto/update-proveedores.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { Roles } from '../../auth/decorators/role.decorator';
+import { ERole } from '../../auth/enum/role.enum';
+import { RolesGuards } from '../../auth/guards/role.guard';
 import { Proveedores } from '../schema/proveedores.schema';
 
 // Importacion necesaria para documentar en swagger para los endpoints
@@ -32,13 +37,11 @@ export class ProveedoresController{
 
     //Controlador para crear el Proveedor
     @Post()
-    // Descripción del endpoint
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({summary: 'Crear un nuevo proveedor'}) 
-    // Respuesta exitosa
     @ApiResponse({status: 201, description: 'El proveedor ha sido creado'}) 
-    // Respueta de error
     @ApiResponse({status: 400, description: 'Solicitud incorrecta'})
-    // Cuerpo del endpoint
     @ApiBody({
         description: 'Cuerpo de solicitud para crear un nuevo proveedor',
         examples:{
@@ -59,13 +62,11 @@ export class ProveedoresController{
 
     //Controlador para desactivar
     @Put('deactivate/:id')
-    //Descripcion del endpoint
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({summary:'Desctivar un proveedor'})
-    //Respuesta exitosa
     @ApiResponse({status: 204, description: 'Proveedor desactivado'})
-    //Resíesta de error
     @ApiResponse({status:400, description:'No se encuentra el proveedor'})
-    // Respuesta de error
     @ApiResponse({status:404, description:'Solicitud incorrecta'})
     @ApiParam({
         name: 'id',
@@ -80,13 +81,11 @@ export class ProveedoresController{
 
      //Controlador para Activar
     @Put('active/:id')
-    //Descripcion del endpoint
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({summary:'Activar un proveedor'})
-    //Respuesta exitosa
     @ApiResponse({status: 204, description: 'Proveedor activado'})
-    //Resíesta de error
     @ApiResponse({status:400, description:'No se encuentra el proveedor'})
-    // Respuesta de error
     @ApiResponse({status:404, description:'Solicitud incorrecta'})
     @ApiParam({
         name: 'id',
@@ -102,13 +101,11 @@ export class ProveedoresController{
 
     //Controlador para eliminar
     @Delete('delete/:id')
-        //Descripcion del endpoint
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
         @ApiOperation({summary:'Eliminar un proveedor'})
-        //Respuesta exitosa
         @ApiResponse({status: 204, description: 'Proveedor eliminado'})
-        //Respuesta de error
         @ApiResponse({status:400, description:'No se encuentra el proveedor'})
-        // Respuesta de error
         @ApiResponse({status:404, description:'Solicitud incorrecta'})
         @ApiParam({
             name: 'id',
@@ -123,11 +120,8 @@ export class ProveedoresController{
 
     //Controlador para obtener todos los proveedores
     @Get()
-    //Descripcion endpoint
     @ApiOperation({summary: 'Obtener todos los proveedores'})
-    // Respuesta de exito
     @ApiResponse({status:200, description: 'Lista de proveedores ', type:[Proveedores] })
-    // Respuesta de error
     @ApiResponse({status: 404, description: 'Paises no encontrados'})
     async findAll(): Promise<Proveedores[]>{
         return await this.proveedoresServies.findAll();
@@ -136,13 +130,9 @@ export class ProveedoresController{
 
     //Controlador para obtener por id
     @Get(':id')
-    //Descripcion del endpoint
     @ApiOperation({summary:'Obtener un proveedor por su Id'})
-    //Respuesta exitosa
     @ApiResponse({status: 204, description: 'Proveedor encontrado'})
-    //Respuesta de error
     @ApiResponse({status:400, description:'No se encuentra el proveedor'})
-    // Respuesta de error
     @ApiResponse({status:404, description:'Solicitud incorrecta'})
     @ApiParam({
         name: 'id',
@@ -157,16 +147,12 @@ export class ProveedoresController{
 
     //Controlador para actualizar todo el proveedor
     @Put('update/:id')
-
-    // Descripción del endpoint
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({summary: 'Actualizar de un proveedor'}) 
-    // Respuesta exitosa
     @ApiResponse({status: 201, description: 'El proveedor ha sido actualizado'}) 
-    // Respueta de error
     @ApiResponse({status: 400, description: 'No se encuentra el proveedor'})
-    // Respuesta de error
     @ApiResponse({status:404, description:'Solicitud incorrecta'})
-    // Cuerpo del endpoint
     @ApiBody({
         description: 'Cuerpo de solicitud para actualizar un nuevo proveedor',
         examples:{
@@ -190,15 +176,12 @@ export class ProveedoresController{
     }
 
     @Patch('updatePartial/:id')
-    // Descripción del endpoint
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({summary: 'Actualizar de un proveedor parcialmente'}) 
-    // Respuesta exitosa
     @ApiResponse({status: 201, description: 'El proveedor ha sido actualizado'}) 
-    // Respueta de error
     @ApiResponse({status: 400, description: 'No se encuentra el proveedor'})
-    // Respuesta de error
     @ApiResponse({status:404, description:'Solicitud incorrecta'})
-    // Cuerpo del endpoint
     @ApiBody({
         description: 'Cuerpo de solicitud para actualizar un nuevo proveedor',
         examples:{

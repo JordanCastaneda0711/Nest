@@ -1,6 +1,4 @@
-
-
-
+import { User } from 'src/module/auth/schema/auth.schema';
 
 export interface IProveedores{
     id?: string;
@@ -8,4 +6,5 @@ export interface IProveedores{
     email_proveedor: string;
     celular_proveedor: string;
     activo_proveedor?: boolean;
+    user: User;
 }

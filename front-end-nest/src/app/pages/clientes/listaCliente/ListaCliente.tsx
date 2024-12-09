@@ -236,7 +236,7 @@ const ClienteLista = () => {
                 </Button>
                 <Grid container spacing={4}>
                     {clientes.map((cliente: any) => (
-                        <Grid item xs={12} md={6} key={cliente.id}>
+                        <Grid item xs={12} md={6} key={cliente._id}>
                             <StyledCard>
                                 <CardContent>
                                     <Typography variant="h6" component="div" gutterBottom>

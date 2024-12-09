@@ -7,12 +7,17 @@ import {
     Param,
     NotFoundException,
     Get,
+    UseGuards,
     Put,
     Patch
 } from '@nestjs/common';
 import { ProductosServices } from '../services/productos.services';
 import { CreateProductoDto } from '../dto/create-productos.dto';
 import { UpdateProductosDto } from '../dto/udpate-productos.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { Roles } from '../../auth/decorators/role.decorator';
+import { ERole } from '../../auth/enum/role.enum';
+import { RolesGuards } from '../../auth/guards/role.guard';
 import { Productos } from '../schema/productos.schema';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiParam } from '@nestjs/swagger';
 
@@ -22,6 +27,8 @@ export class ProductosControllers {
     constructor(private readonly productosServices: ProductosServices) { }
 
     @Post()
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Crear un nuevo producto' })
     @ApiResponse({ status: 201, description: 'Producto creado con éxito' })
     @ApiResponse({ status: 400, description: 'Solicitud incorrecta' })
@@ -71,6 +78,8 @@ export class ProductosControllers {
     }
     
     @Put('update/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Actualizar un producto por ID' })
     @ApiResponse({ status: 200, description: 'Producto actualizado con éxito' })
     @ApiResponse({ status: 404, description: 'Producto no encontrado' })
@@ -99,6 +108,8 @@ export class ProductosControllers {
     }
 
     @Patch('updatePartial/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Actualizar parcialmente un producto por ID' })
     @ApiResponse({ status: 200, description: 'Producto actualizado parcialmente con éxito' })
     @ApiResponse({ status: 404, description: 'Producto no encontrado' })
@@ -123,6 +134,8 @@ export class ProductosControllers {
     }
 
     @Delete('delete/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Eliminar un producto por ID' })
     @ApiResponse({ status: 204, description: 'Producto eliminado con éxito' })
     @ApiResponse({ status: 404, description: 'Producto no encontrado' })
@@ -136,6 +149,8 @@ export class ProductosControllers {
     }
 
     @Put('deactivate/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Desactivar un producto por ID' })
     @ApiResponse({ status: 200, description: 'Producto desactivado con éxito' })
     @ApiResponse({ status: 404, description: 'Producto no encontrado' })
@@ -149,6 +164,8 @@ export class ProductosControllers {
     }
 
     @Put('activate/:id')
+    @Roles(ERole.MODERATOR, ERole.ADMIN, ERole.USER)
+    @UseGuards(AuthGuard(), RolesGuards)
     @ApiOperation({ summary: 'Activar un producto por ID' })
     @ApiResponse({ status: 200, description: 'Producto activado con éxito' })
     @ApiResponse({ status: 404, description: 'Producto no encontrado' })

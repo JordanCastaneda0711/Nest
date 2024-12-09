@@ -320,12 +320,8 @@ const ProductoLista: React.FC = () => {
                       {producto.activo ? "Activo" : "Desactivado"}
                     </span>
                   </TableCell>
-                  <TableCell>
-                  {producto.cliente
-                  .map((clienteObj) => clienteObj.nombre_cliente || 'Cliente no encontrado')
-                  .join(', ')}
-                  </TableCell>
-                  <TableCell>{producto.proveedor}</TableCell>
+                  <TableCell>{producto.cliente.join(', ')}</TableCell>
+                  <TableCell>{producto.proveedor.join(", ")}</TableCell>
                   <TableCell>
                     <Tooltip title="Editar producto">
                       <Button onClick={() => handleOpenEditModal(producto)}>

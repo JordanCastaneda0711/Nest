@@ -1,6 +1,7 @@
-import { IsString, IsNumber, IsOptional, IsArray, ArrayNotEmpty } from 'class-validator';
+import { IsEmpty, IsNotEmpty, IsString, IsNumber, IsOptional, IsArray, ArrayNotEmpty } from 'class-validator';
 import { Types } from 'mongoose';
 import { Clientes } from 'src/module/clientes/schema/clientes.schema';
+import { User } from 'src/module/auth/schema/auth.schema';
 
 
 export class CreateProductoDto {
@@ -24,4 +25,7 @@ export class CreateProductoDto {
 
     @IsOptional()
     activo?: boolean;
+
+    @IsEmpty({ message: 'You can not pass user id' })
+    user: User;
 }

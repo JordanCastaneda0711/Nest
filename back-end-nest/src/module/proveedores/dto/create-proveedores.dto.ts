@@ -1,4 +1,6 @@
-import { IsNotEmpty, IsString, IsBoolean} from "class-validator";
+import { IsEmpty, IsNotEmpty, IsString, IsBoolean} from "class-validator";
+import { User } from 'src/module/auth/schema/auth.schema';
+
 export class CreateProveedoresDto{
     @IsNotEmpty()
     @IsString()
@@ -14,4 +16,7 @@ export class CreateProveedoresDto{
 
     @IsBoolean()
     activo_proveedor?: boolean
+
+    @IsEmpty({ message: 'You can not pass user id' })
+    user: User;
 }

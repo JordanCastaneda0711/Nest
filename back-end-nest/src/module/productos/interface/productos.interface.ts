@@ -1,4 +1,5 @@
 import { Clientes } from "src/module/clientes/schema/clientes.schema";
+import { User } from 'src/module/auth/schema/auth.schema';
 
 export interface IProductos {
     id?: string;
@@ -8,4 +9,5 @@ export interface IProductos {
     cliente?: string[];
     proveedor?: string[];
     activo?: boolean;
+    user: User;
 }
